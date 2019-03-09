@@ -28,8 +28,8 @@ ext {
             junit4: "junit:junit:$junit4Version",
     ]
 
-//    projectModules = [
+    projectModules = [
 //            core      : project(':core'),
-//            topartists: project(':topartists')
-//    ]
+            topartists: project(':topartists')
+    ]
 }
