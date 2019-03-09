@@ -1,2 +1,2 @@
-include ':app', ':topartists'
+include ':app', ':topartists', ':core'
 rootProject.name='MuseleeCopy'
