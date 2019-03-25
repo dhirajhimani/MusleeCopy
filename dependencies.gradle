@@ -3,7 +3,7 @@ ext {
     androidTargetSdkVersion = 28
     androidCompileSdkVersion = 28
 
-    androidBuildToolsVersion = '3.5.0-alpha06'
+    androidBuildToolsVersion = '3.4.0-alpha09'
 
     jetpackVersion = '1.1.0-alpha01'
     constraintLayoutVersion = '2.0.0-alpha3'
