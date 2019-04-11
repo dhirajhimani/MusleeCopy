@@ -1,12 +1,24 @@
 package com.example.museleecopy.di
 
-import com.example.museleecopy.MuseleeActivity
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import com.example.museleecopy.MuseleeApplication
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-abstract class ApplicationModule {
+object ApplicationModule {
 
-    @ContributesAndroidInjector
-    abstract fun bindMuseleeActivity(): MuseleeActivity
+    @Provides
+    @JvmStatic
+    @Singleton
+    internal fun provideApplication(app: MuseleeApplication): Application = app
+
+    @Provides
+    @JvmStatic
+    @Singleton
+    fun providesConnectivityManager(app: Application): ConnectivityManager =
+        app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 }
