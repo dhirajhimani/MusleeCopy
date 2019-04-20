@@ -1,9 +1,22 @@
+
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.detekt) version(BuildPlugins.Versions.detekt)
+}
+
+val props = Properties()
+val localProperties: File = project.rootProject.file("local.properties")
+if (localProperties.exists()) {
+    props.load(FileInputStream(localProperties))
+}
+if (!props.containsKey("last.fm.apikey")){
+    props["last.fm.apikey"] = rootProject.properties["LAST_FM_APIKEY"]
 }
 
 android {
@@ -14,6 +27,8 @@ android {
         targetSdkVersion(AndroidSdk.target)
 
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "LAST_FM_APIKEY", props["last.fm.apikey"] as String)
     }
 
     buildTypes {
