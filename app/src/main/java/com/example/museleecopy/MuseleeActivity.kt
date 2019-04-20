@@ -1,7 +1,7 @@
 package com.example.museleecopy
 
 import android.os.Bundle
-import com.stylingandroid.muselee.topartists.view.TopArtistsFragment
+import com.example.topartists.view.TopArtistsFragment
 import dagger.android.support.DaggerAppCompatActivity
 
 class MuseleeActivity : DaggerAppCompatActivity() {

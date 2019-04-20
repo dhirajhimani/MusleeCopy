@@ -1,4 +1,4 @@
-package com.stylingandroid.muselee.topartists.view
+package com.example.topartists.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

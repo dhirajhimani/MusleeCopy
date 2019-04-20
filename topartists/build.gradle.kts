@@ -26,13 +26,18 @@ android {
 }
 
 dependencies {
+    implementation(project(ProjectModules.core))
+
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.appCompat)
     implementation(Libraries.ktxCore)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.archLifecycle)
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.glide)
+    api(Libraries.retrofit)
+    implementation(Libraries.retrofitMoshi)
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidCompiler)
     kapt(Libraries.glideCompiler)

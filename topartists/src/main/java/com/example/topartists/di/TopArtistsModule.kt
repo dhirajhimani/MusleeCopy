@@ -1,6 +1,6 @@
-package com.stylingandroid.muselee.topartists.di
+package com.example.topartists.di
 
-import com.stylingandroid.muselee.topartists.view.TopArtistsFragment
+import com.example.topartists.view.TopArtistsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
