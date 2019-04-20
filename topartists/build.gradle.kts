@@ -65,3 +65,6 @@ detekt {
     input = files("src/main/java", "src/androidx/java", "src/support/java")
     filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
 }
+kapt {
+    generateStubs = true
+}
