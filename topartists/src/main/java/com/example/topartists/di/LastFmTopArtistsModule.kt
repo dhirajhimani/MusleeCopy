@@ -13,7 +13,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-object LastFmTopArtistsRepositoryModule {
+object LastFmTopArtistsModule {
 
     @Provides
     @JvmStatic
