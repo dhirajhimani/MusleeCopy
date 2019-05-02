@@ -4,12 +4,14 @@ import com.example.core.providers.DataMapper
 import com.example.topartists.entities.Artist.ImageSize
 import com.example.topartists.entities.Artist
 
-class LastFmArtistsMapper : DataMapper<LastFmArtists, List<Artist>> {
+class LastFmArtistsMapper : DataMapper<Pair<LastFmArtists, Long>, List<Artist>> {
 
-    override fun map(source: LastFmArtists): List<Artist> =
-        source.artists.artist.map { artist ->
-            Artist(artist.name, artist.normalisedImages())
+    override fun encode(source: Pair<LastFmArtists, Long>): List<Artist> {
+        val (lastFmArtists, expiry) = source
+        return lastFmArtists.artists.artist.map { artist ->
+            Artist(artist.name, artist.normalisedImages(), expiry)
         }
+    }
 
     private fun LastFmArtist.normalisedImages() =
         images.map { it.size.toImageSize() to it.url }.toMap()
