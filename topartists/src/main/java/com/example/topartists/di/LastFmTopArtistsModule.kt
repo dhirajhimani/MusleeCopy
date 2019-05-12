@@ -11,11 +11,13 @@ import com.example.topartists.net.LastFmTopArtistsApi
 import com.example.topartists.net.LastFmTopArtistsProvider
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 @Module
 object LastFmTopArtistsModule {
 
     @Provides
+    @Named(TopArtistsModule.NETWORK)
     @JvmStatic
     fun providesTopArtistsProvider(
         lastFmTopArtistsApi: LastFmTopArtistsApi,
