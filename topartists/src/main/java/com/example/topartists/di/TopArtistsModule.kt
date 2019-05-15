@@ -3,8 +3,11 @@ package com.example.topartists.di
 import androidx.lifecycle.ViewModel
 import com.example.core.di.BaseViewModule
 import com.example.core.di.ViewModelKey
+import com.example.core.di.WorkerKey
+import com.example.topartists.scheduler.TopArtistsUpdateWorker
 import com.example.topartists.view.TopArtistsFragment
 import com.example.topartists.view.TopArtistsViewModel
+import com.stylingandroid.muselee.work.DaggerWorkerFactory
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -34,4 +37,10 @@ abstract class TopArtistsModule {
     @IntoMap
     @ViewModelKey(TopArtistsViewModel::class)
     abstract fun bindChartsViewModel(viewModel: TopArtistsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @WorkerKey(TopArtistsUpdateWorker::class)
+    abstract fun bindTopArtistsUpdateWorker(factory: TopArtistsUpdateWorker.Factory):
+            DaggerWorkerFactory.ChildWorkerFactory
 }
