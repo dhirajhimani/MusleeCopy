@@ -1,4 +1,4 @@
-package com.stylingandroid.muselee.work
+package com.example.core.work
 
 import android.content.Context
 import androidx.work.ListenableWorker

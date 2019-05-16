@@ -9,7 +9,7 @@ plugins {
 android {
     compileSdkVersion(AndroidSdk.compile)
     defaultConfig {
-        applicationId = "com.stylingandroid.muselee"
+        applicationId = "com.example.museleecopy"
         minSdkVersion(AndroidSdk.min)
         targetSdkVersion(AndroidSdk.target)
         versionCode = 1

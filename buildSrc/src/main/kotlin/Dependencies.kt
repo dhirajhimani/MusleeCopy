@@ -19,8 +19,8 @@ object BuildPlugins {
 
 object AndroidSdk {
     const val min = 21
-    const val compile = 28
-    const val target = compile
+    const val compile = "android-Q"
+    const val target = "28"
 }
 
 object ProjectModules {

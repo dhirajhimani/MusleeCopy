@@ -1,6 +1,5 @@
 package com.example.topartists.di
 
-import com.example.core.app.ConnectivityChecker
 import com.example.core.providers.DataMapper
 import com.example.core.providers.DataProvider
 import com.example.topartists.entities.Artist
@@ -21,12 +20,10 @@ object LastFmTopArtistsModule {
     @JvmStatic
     fun providesTopArtistsProvider(
         lastFmTopArtistsApi: LastFmTopArtistsApi,
-        connectivityChecker: ConnectivityChecker,
         mapper: DataMapper<Pair<LastFmArtists, Long>, List<Artist>>
     ): DataProvider<TopArtistsState> =
         LastFmTopArtistsProvider(
             lastFmTopArtistsApi,
-            connectivityChecker,
             mapper
         )
 

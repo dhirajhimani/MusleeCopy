@@ -2,8 +2,8 @@ package com.example.museleecopy
 
 import androidx.work.Configuration
 import androidx.work.WorkManager
+import com.example.core.work.DaggerWorkerFactory
 import com.example.museleecopy.di.DaggerApplicationComponent
-import com.stylingandroid.muselee.work.DaggerWorkerFactory
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import javax.inject.Inject

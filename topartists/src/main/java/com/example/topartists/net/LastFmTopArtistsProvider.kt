@@ -1,6 +1,5 @@
 package com.example.topartists.net
 
-import com.example.core.app.ConnectivityChecker
 import com.example.core.providers.DataMapper
 import com.example.core.providers.DataProvider
 import com.example.topartists.entities.Artist
@@ -13,30 +12,22 @@ import java.util.concurrent.TimeUnit
 
 class LastFmTopArtistsProvider(
     private val topArtistsApi: LastFmTopArtistsApi,
-    private val connectivityChecker: ConnectivityChecker,
     private val mapper: DataMapper<Pair<LastFmArtists, Long>, List<Artist>>
 ) : DataProvider<TopArtistsState> {
 
     override fun requestData(): TopArtistsState {
-        return if (!connectivityChecker.isConnected) {
-            TopArtistsState.Error("No network connectivity")
-        } else {
-            val response = topArtistsApi.getTopArtists().execute()
-            response.takeIf { it.isSuccessful }?.body()?.let { artists ->
-                TopArtistsState.Success(mapper.encode(artists to response.expiry))
-            } ?: TopArtistsState.Error(response.errorBody()?.string() ?: "Network Error")
-        }
+        val response = topArtistsApi.getTopArtists().execute()
+        return response.takeIf { it.isSuccessful }?.body()?.let { artists ->
+            TopArtistsState.Success(mapper.encode(artists to response.expiry))
+        } ?: TopArtistsState.Error(response.errorBody()?.string() ?: "Network Error")
     }
 
     override fun requestData(callback: (topArtists: TopArtistsState) -> Unit) {
-        if (!connectivityChecker.isConnected) {
-            callback(TopArtistsState.Error("No network connectivity"))
-            return
-        }
         callback(TopArtistsState.Loading)
         topArtistsApi.getTopArtists().enqueue(object : Callback<LastFmArtists> {
+
             override fun onFailure(call: Call<LastFmArtists>, t: Throwable) {
-                callback(TopArtistsState.Error(t.localizedMessage))
+                callback(TopArtistsState.Error(t.localizedMessage ?: t.toString()))
             }
 
             override fun onResponse(call: Call<LastFmArtists>, response: Response<LastFmArtists>) {

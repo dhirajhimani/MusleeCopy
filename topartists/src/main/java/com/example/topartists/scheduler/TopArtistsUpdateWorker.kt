@@ -7,10 +7,10 @@ import androidx.work.WorkerParameters
 import com.example.core.providers.DataPersister
 import com.example.core.providers.DataProvider
 import com.example.core.providers.UpdateScheduler
+import com.example.core.work.DaggerWorkerFactory
 import com.example.topartists.di.TopArtistsModule
 import com.example.topartists.entities.Artist
 import com.example.topartists.entities.TopArtistsState
-import com.stylingandroid.muselee.work.DaggerWorkerFactory
 import javax.inject.Inject
 import javax.inject.Named
 

@@ -3,6 +3,7 @@ package com.example.museleecopy.di
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import com.example.core.connectivity.ConnectivityLiveData
 import com.example.museleecopy.MuseleeApplication
 import dagger.Module
 import dagger.Provides
@@ -21,4 +22,11 @@ object ApplicationModule {
     @Singleton
     fun providesConnectivityManager(app: Application): ConnectivityManager =
         app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    @Provides
+    @JvmStatic
+    @Singleton
+    fun providesConnectivityLiveData(app: Application) =
+        ConnectivityLiveData(app)
+
 }

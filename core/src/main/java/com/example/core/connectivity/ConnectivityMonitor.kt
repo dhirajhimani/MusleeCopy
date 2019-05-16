@@ -1,4 +1,4 @@
-package com.stylingandroid.muselee.connectivity
+package com.example.core.connectivity
 
 import android.annotation.TargetApi
 import android.content.BroadcastReceiver
