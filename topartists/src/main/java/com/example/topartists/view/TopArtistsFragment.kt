@@ -1,21 +1,26 @@
 package com.example.topartists.view
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.os.BuildCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core.connectivity.ConnectivityState
 import com.example.topartists.R
 import com.example.topartists.entities.Artist
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -32,6 +37,18 @@ class TopArtistsFragment : DaggerFragment() {
     private lateinit var retryButton: Button
     private lateinit var progress: ProgressBar
     private lateinit var errorMessage: TextView
+
+    private val connectivitySnackbar: Snackbar by lazy {
+        Snackbar.make(topArtistsRecyclerView, R.string.no_connectivity, Snackbar.LENGTH_INDEFINITE)
+            .setAction(R.string.network_settings) {
+                val intent = if (BuildCompat.isAtLeastQ()) {
+                    Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+                } else {
+                    Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                }
+                startActivity(intent)
+            }
+    }
 
     private var itemSpacing: Int = 0
     private val spanCount: Int = GridPositionCalculator.fullSpanSize
@@ -69,6 +86,20 @@ class TopArtistsFragment : DaggerFragment() {
             }
             topArtistsViewModel.topArtistsViewState.observe(this, Observer { newState -> viewStateChanged(newState) })
         }
+
+    override fun onResume() {
+        super.onResume()
+        topArtistsViewModel.connectivityLiveData.observe(this, Observer { newState -> connectivityChange(newState) })
+        topArtistsViewModel.topArtistsViewState.observe(this, Observer { newState -> viewStateChanged(newState) })
+    }
+
+    private fun connectivityChange(connectivityState: ConnectivityState) {
+        if (connectivityState == ConnectivityState.Connected) {
+            connectivitySnackbar.dismiss()
+        } else {
+            connectivitySnackbar.show()
+        }
+    }
 
     private fun viewStateChanged(topArtistsViewState: TopArtistsViewState) {
         when (topArtistsViewState) {

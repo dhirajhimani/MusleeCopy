@@ -3,6 +3,7 @@ package com.example.topartists.view
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.core.connectivity.ConnectivityLiveData
 import com.example.core.providers.DataProvider
 import com.example.topartists.di.TopArtistsModule
 import com.example.topartists.entities.TopArtistsState
@@ -14,7 +15,8 @@ import kotlin.coroutines.CoroutineContext
 class TopArtistsViewModel @Inject constructor
     (
     @Named(TopArtistsModule.ENTITIES)
-    private val topArtistsProvider: DataProvider<TopArtistsState>
+    private val topArtistsProvider: DataProvider<TopArtistsState>,
+    val connectivityLiveData: ConnectivityLiveData
     ) : ViewModel(), CoroutineScope {
 
     private val job = Job()
